@@ -41,6 +41,7 @@
 усложненное задание пользователь вводит полный /home/user/... или относительный user/my/... путь. Меняем рабочую директорию на ту что ввели и работаем уже в ней
 - выход
 выход из программы
+- дополнительно - переименование файла
 """
 import os
 import shutil
@@ -74,12 +75,23 @@ while True:
     elif choice == '4':
         print(os.listdir())
     elif choice == '5':
-        pass
+        for root, dirs, files in os.walk(os.getcwd()):
+            print(dirs)
+            break
+
     elif choice == '6':
         from os import listdir
         from os.path import isfile, join
         onlyfiles = [f for f in listdir(os.getcwd()) if isfile(join(os.getcwd(), f))]
         print(onlyfiles)
+
+        # from os import walk
+        # f = []
+        # for (dirpath, dirnames, filenames) in walk(os.getcwd()):
+        #     f.extend(filenames)
+        #     break
+        # print(f)
+
         #import glob
         #print(os.getcwd())
         #print(glob.glob("os.getcwd()/*.py"))
