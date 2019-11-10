@@ -58,7 +58,8 @@ while True:
     print('9. играть в викторину')
     print('10. мой банковский счет')
     print('11. cмена рабочей директории ')
-    print('12. выход')
+    print('12. переименовать файл')
+    print('13. выход')
     choice = input('Выберите пункт меню')
     if choice == '1':
         name_file = input('Введите название название папки')
@@ -75,7 +76,13 @@ while True:
     elif choice == '5':
         pass
     elif choice == '6':
-        pass
+        from os import listdir
+        from os.path import isfile, join
+        onlyfiles = [f for f in listdir(os.getcwd()) if isfile(join(os.getcwd(), f))]
+        print(onlyfiles)
+        #import glob
+        #print(os.getcwd())
+        #print(glob.glob("os.getcwd()/*.py"))
     elif choice == '7':
         try:
             print(os.uname())
@@ -91,6 +98,10 @@ while True:
     elif choice == '11':
         os.chdir(input('Укажите новую директорию: '))
     elif choice == '12':
+        name_file_rename = input("Введите имя файла Для переименования: ")
+        new_name_file = input("Введите новое имя файла: ")
+        os.rename(name_file_rename, new_name_file)
+    elif choice == '13':
         break
     else:
         print('Неверный пункт меню')
