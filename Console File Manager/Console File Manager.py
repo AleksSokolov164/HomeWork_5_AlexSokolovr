@@ -92,9 +92,6 @@ while True:
         #     break
         # print(f)
 
-        #import glob
-        #print(os.getcwd())
-        #print(glob.glob("os.getcwd()/*.py"))
     elif choice == '7':
         try:
             print(os.uname())
