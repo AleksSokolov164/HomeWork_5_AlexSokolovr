@@ -1,5 +1,6 @@
 import os
 import shutil
+from math import *
 from use_functions import my_score
 from victory import victorina
 
@@ -64,3 +65,7 @@ def file_rename():
     name_file_rename = input("Введите имя файла Для переименования: ")
     new_name_file = input("Введите новое имя файла: ")
     os.rename(name_file_rename, new_name_file)
+
+def one_pi():
+    one = pi/pi
+    return one

@@ -5,6 +5,25 @@
  Чем больше тестов на каждую функцию - тем лучше
 """
 from math import *
+from functions_Console_file_manager import *
+
+
+
+
+def test_map():
+    number = [-2,-1,0,1,2]
+    strong = ['1', 'a', 'b', '+c', 'dddd']
+    boolean = [True, False]
+    def f (x):
+        return x*2
+    assert list(map(f, number)) == [-4,-2,0,2,4]
+    assert  list(map(f, strong)) == ['11', 'aa', 'bb', '+c+c', 'dddddddd']
+    assert list(map(f,boolean)) == [ 2, 0 ]
+    assert list(map(f, [5,4])) == [10,8]
+
+
+def test_one_pi():
+    assert one_pi() == 1
 
 def test_trunc():
     assert pi//3 == 1
