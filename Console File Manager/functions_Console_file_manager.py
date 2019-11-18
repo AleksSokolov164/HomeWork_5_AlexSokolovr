@@ -56,7 +56,8 @@ def info_os():
         print(os.environ)
 
 def program_author():
-    print('Соколов Александр Валерьевич')
+    author_program = 'Соколов Александр Валерьевич'
+    return author_program
 
 def new_directory():
     os.chdir(input('Укажите новую директорию: '))

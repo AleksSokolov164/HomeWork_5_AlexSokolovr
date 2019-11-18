@@ -80,7 +80,7 @@ while True:
     elif choice == '7':
         info_os()
     elif choice == '8':
-        program_author()
+        print(program_author())
     elif choice == '9':
         victorina()
     elif choice == '10':
