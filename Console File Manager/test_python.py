@@ -7,8 +7,26 @@
 from math import *
 from functions_Console_file_manager import *
 
+def test_sorted():
+    assert sorted([5, 2, 3, 1, 4,1]) == [1,1, 2, 3, 4, 5]
+    assert sorted([5, 2, 3, 1, 4, 1],reverse=True) == [5, 4, 3, 2, 1, 1]
+    assert sorted('adaretfdsqq') == ['a', 'a', 'd', 'd', 'e', 'f', 'q', 'q', 'r', 's', 't']
+    assert sorted({2: 'D', 1: 'B', 3: 'B', 4: 'E', 5: 'A'}) == [1, 2, 3, 4, 5]
+    student_tuples = [
+        ('john', 'A', 15),
+        ('jane', 'B', 12),
+        ('dave', 'B', 10),
+    ]
+    assert sorted(student_tuples, key=lambda student: student[2]) == [('dave', 'B', 10), ('jane', 'B', 12), ('john', 'A', 15)]  # сортируем по возрасту
 
 
+def test_filter():
+    a = [-1, 0, 1, 0, 0, 1, 0, -1]
+    assert list(filter(None, a)) == [-1, 1, 1, -1]
+    strong = 'a1b2c3d4e6f7i8t9'
+    assert list(filter(set, strong)) == ['a', '1', 'b', '2', 'c', '3', 'd', '4', 'e', '6', 'f', '7', 'i', '8', 't', '9']
+    s = ['a', '', 'c', 'd', ' ']
+    assert list(filter(None, s)) == ['a', 'c', 'd', ' ']
 
 def test_map():
     number = [-2,-1,0,1,2]
