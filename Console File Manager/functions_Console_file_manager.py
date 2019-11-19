@@ -23,7 +23,7 @@ def create_a_folder():
     os.mkdir(name_file)
 
 def delete_file():
-    #удаление файла в текщей директории
+    #удаление файла в текущей директории
     name_file = input('Введите название название папки')
     os.rmdir(name_file)
 
@@ -49,20 +49,23 @@ def review_files_directory():
     print(onlyfiles)
 
 def info_os():
+    """
+    информация об операционной системе
+    """
     try:
         print(os.uname())
     except AttributeError:
         print(os.name)
         print(os.environ)
 
-def program_author():
+def program_author(): # информация об авторе программы
     author_program = 'Соколов Александр Валерьевич'
     return author_program
 
-def new_directory():
+def new_directory():# открываем новую директорию
     os.chdir(input('Укажите новую директорию: '))
 
-def file_rename():
+def file_rename():#переименовываем файл
     name_file_rename = input("Введите имя файла Для переименования: ")
     new_name_file = input("Введите новое имя файла: ")
     os.rename(name_file_rename, new_name_file)

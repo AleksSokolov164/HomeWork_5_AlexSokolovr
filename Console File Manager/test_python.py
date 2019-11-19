@@ -5,7 +5,7 @@
  Чем больше тестов на каждую функцию - тем лучше
 """
 from math import *
-from functions_Console_file_manager import *
+from functions_Console_file_manager import one_pi
 
 def test_sorted():
     assert sorted([5, 2, 3, 1, 4,1]) == [1,1, 2, 3, 4, 5]

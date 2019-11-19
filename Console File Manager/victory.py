@@ -66,16 +66,16 @@ def victorina():
         result = random.sample(composer, number_of_questions)
         amount_answer_plus = 0
         for i in result:
-            birthday_composer = (input('Введите год рождения '+i+' в формате "дд.мм.гггг" : '))
+            birthday_composer = (input(f'Введите год рождения {i} в формате "дд.мм.гггг" : '))
             if birthday_composer!=composer_bd[i]:
                 str1 = composer_bd[i].split(".")
                 otvet_day = dd[int(str1[0])]
                 otvet_month = mm[int(str1[1])]
                 otvet_year = (str1[2])
-                print('Неверно! Правильный ответ: День рождения '+i+' '+otvet_day+' '+otvet_month+' '+otvet_year+' года')
+                print(f'Неверно! Правильный ответ: День рождения {i}  {otvet_day}  {otvet_month} {otvet_year} года')
             else:
                 amount_answer_plus = amount_answer_plus+1
-        print("Количество правильных ответов=", amount_answer_plus, "Количество неправильных ответов =", number_of_questions-amount_answer_plus)
+        print(f"Количество правильных ответов={amount_answer_plus}, Количество неправильных ответов ={(number_of_questions-amount_answer_plus)}")
         answer = input("Желаете повторить ещё раз? (да\нет)")
 if __name__ == '__main__':
     print('Проверка фукции')
