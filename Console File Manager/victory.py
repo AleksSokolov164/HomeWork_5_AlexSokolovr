@@ -75,7 +75,8 @@ def victorina():
                 print(f'Неверно! Правильный ответ: День рождения {i}  {otvet_day}  {otvet_month} {otvet_year} года')
             else:
                 amount_answer_plus = amount_answer_plus+1
-        print(f"Количество правильных ответов={amount_answer_plus}, Количество неправильных ответов ={(number_of_questions-amount_answer_plus)}")
+        wrong_answers = number_of_questions - amount_answer_plus
+        print(f"Количество правильных ответов={amount_answer_plus}, Количество неправильных ответов ={wrong_answers}")
         answer = input("Желаете повторить ещё раз? (да\нет)")
 if __name__ == '__main__':
     print('Проверка фукции')

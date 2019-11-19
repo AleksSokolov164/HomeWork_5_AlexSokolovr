@@ -65,9 +65,11 @@ while True:
     print('13. выход')
     choice = input('Выберите пункт меню')
     if choice == '1':
-        create_a_folder()
+        name_file = input('Введите название папки')
+        create_a_folder(name_file)
     elif choice == '2':
-        delete_file()
+        name_file_delet = input('Введите название название папки')
+        delete_file(name_file_delet)
     elif choice == '3':
         copy_file()
     elif choice == '4':
