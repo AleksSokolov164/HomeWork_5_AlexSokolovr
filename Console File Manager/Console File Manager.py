@@ -47,6 +47,8 @@ import os
 import shutil
 from use_functions import my_score
 from victory import victorina
+from functions_Console_file_manager import *
+
 while True:
     print('1. создать папку')
     print('2.удалить (файл/папку) ')
@@ -63,53 +65,32 @@ while True:
     print('13. выход')
     choice = input('Выберите пункт меню')
     if choice == '1':
-        name_file = input('Введите название название папки')
-        os.mkdir(name_file)
+        name_file = input('Введите название папки')
+        create_a_folder(name_file)
     elif choice == '2':
-        name_file = input('Введите название название папки')
-        os.rmdir(name_file)
+        name_file_delet = input('Введите название название папки')
+        delete_file(name_file_delet)
     elif choice == '3':
-        name_file_copy = input("Введите имя копируемого файла: ")
-        name_file_new = input("Введите имя нового файла: ")
-        shutil.copy(name_file_copy, name_file_new)
+        copy_file()
     elif choice == '4':
-        print(os.listdir())
+        review_directory()
     elif choice == '5':
-        for root, dirs, files in os.walk(os.getcwd()):
-            print(dirs)
-            break
+        review_a_folders_directory()
 
     elif choice == '6':
-        from os import listdir
-        from os.path import isfile, join
-        onlyfiles = [f for f in listdir(os.getcwd()) if isfile(join(os.getcwd(), f))]
-        print(onlyfiles)
-
-        # from os import walk
-        # f = []
-        # for (dirpath, dirnames, filenames) in walk(os.getcwd()):
-        #     f.extend(filenames)
-        #     break
-        # print(f)
-
+        review_files_directory()
     elif choice == '7':
-        try:
-            print(os.uname())
-        except AttributeError:
-            print(os.name)
-            print(os.environ)
+        info_os()
     elif choice == '8':
-        print('Соколов Александр Валерьевич')
+        print(program_author())
     elif choice == '9':
         victorina()
     elif choice == '10':
         my_score()
     elif choice == '11':
-        os.chdir(input('Укажите новую директорию: '))
+        new_directory()
     elif choice == '12':
-        name_file_rename = input("Введите имя файла Для переименования: ")
-        new_name_file = input("Введите новое имя файла: ")
-        os.rename(name_file_rename, new_name_file)
+        file_rename()
     elif choice == '13':
         break
     else:
