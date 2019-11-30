@@ -42,13 +42,17 @@ def my_score():
     operatin = 'нет операций'  # описание операции со счетом
     debit = float(0)  # приход по счету пользователя
     credit = float(0)  # расход по счету пользователя
-    total = float(0)  # сумма на счету пользователя
+    with open('total_save.txt', 'r') as f:
+        # Читаем сумму на счете из файла
+        total = float(f.read())
+        print(f'Сумма на вашем счете {total}')
     purchase_history = [[n_operatin, operatin, debit, credit, total], ]  # история покупок
-    total_debit = float(0)
-    total_credit = float(0)
-    def separator(simbol, count):
+    total_debit = float(0)# итог по дебету
+    total_credit = float(0)# итог по кредиту
+    def separator(simbol, count): # функция вывода разделительной строки из знаков simbol  в кол-ве count
         k = simbol * count
         print(k)
+
     while True:
         print('1. пополнение счета')
         print('2. покупка')
@@ -105,6 +109,9 @@ def my_score():
                 purchase_history.append([n_operatin, operatin, debit, credit, total])
                 total_credit = total_credit+credit
         elif choice == '5':
+            with open('total_save.txt', 'w') as f:
+                #Записываем в файл сумму
+                f.write(str(total))
             break
         else:
             print('Неверный пункт меню')
