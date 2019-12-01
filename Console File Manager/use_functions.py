@@ -39,6 +39,7 @@
 """
 import os
 import pickle
+import datetime
 def my_score():
     n_operatin = int(0)  # номер операции со счетом
     operatin = 'Сумма на счете'  # описание операции со счетом
@@ -47,7 +48,9 @@ def my_score():
     with open('total_save.txt', 'r') as f:
         # Читаем сумму на счете из файла
         total = float(f.read())
-    purchase_history = [[n_operatin, operatin, debit, credit, total], ]  # история покупок
+    date_today = datetime.datetime.today().strftime("%d-%m-%Y") # дата совершения операции
+    time_today = datetime.datetime.today().strftime("%H.%M.%S")  # время совершения операции
+    purchase_history = [[n_operatin, operatin, debit, credit, total,date_today,time_today], ]  # история покупок
     total_debit = float(0)# итог по дебету
     total_credit = float(0)# итог по кредиту
     def separator(simbol, count): # функция вывода разделительной строки из знаков simbol  в кол-ве count
@@ -74,7 +77,9 @@ def my_score():
             debit = float(input('Ввудите сумму пополнения счета: '))  # приход по счету пользователя
             credit = float(0)  # расход по счету пользователя
             total = total + debit  # сумма на счету пользователя
-            purchase_history.append([n_operatin, operatin, debit, credit, total])
+            date_today = datetime.datetime.today().strftime("%d-%m-%Y")  # дата совершения операции
+            time_today = datetime.datetime.today().strftime("%H.%M.%S")   # время совершения операции
+            purchase_history.append([n_operatin, operatin, debit, credit, total,date_today,time_today])
             total_debit = total_debit+debit
         elif choice == '2':
             debit = float(0)  # приход по счету пользователя
@@ -85,16 +90,18 @@ def my_score():
                 operatin = input('Введите название покупки: ')  # описание операции со счетом
                 total = total - credit  # сумма на счету пользователя
                 n_operatin = n_operatin + 1  # номер операции со счетом
-                purchase_history.append([n_operatin, operatin, debit, credit, total])
+                date_today = datetime.datetime.today().strftime("%d-%m-%Y")  # дата совершения операции
+                time_today = datetime.datetime.today().strftime("%H.%M.%S")  # время совершения операции
+                purchase_history.append([n_operatin, operatin, debit, credit, total,date_today,time_today])
                 total_credit = total_credit+credit
         elif choice == '3':
             width_n_operatin = 5  # ширина столбца - номер операции со счетом
             width_operatin = 25   # ширина столбца -описание операции со счетом
             width_debit = 15  # ширина столбца -приход по счету пользователя
             width_credit = 15  # ширина столбца -расход по счету пользователя
-            width_total = 15  # ширина столбца -сумма на счету пользователя
-            print('N    операция                    приход           расход           итог ')
-            separator('*', 80)
+            width_total = 10  # ширина столбца -сумма на счету пользователя
+            print('N    операция                    приход           расход           итог         дата       время ')
+            separator('*', 100)
             for i in purchase_history:
                 tail_width_n_operatin = ' '*(width_n_operatin-len(str(i[0]))) # выравнивание по сроке - номер операции со счетом
                 tail_width_operatin = ' '*(width_operatin- len(i[1]))  # выравнивание по сроке -описание операции со счетом
@@ -102,8 +109,8 @@ def my_score():
                 tail_width_credit = ' '*(width_credit-len(str(i[3])))  # выравнивание по сроке -расход по счету пользователя
                 tail_width_total = ' '*(width_total-len(str(i[4])))  # выравнивание по сроке -сумма на счету пользователя
                 print(f'{i[0]} {tail_width_n_operatin} {i[1]} {tail_width_operatin} {i[2]} {tail_width_debit} '
-                       f'{i[3]} {tail_width_credit} {i[4]} {tail_width_total} ')
-                separator('-',80)
+                       f'{i[3]} {tail_width_credit} {i[4]} {tail_width_total}  {i[5]} {i[6]} ')
+                separator('-',100)
             print(f'       ИТОГО                      {total_debit}              {total_credit}              {i[4]} ')
         elif choice == '4':
             debit = float(0)  # приход по счету пользователя
@@ -114,7 +121,9 @@ def my_score():
                 operatin = 'выдача наличных '  # описание операции со счетом
                 total = total - credit  # сумма на счету пользователя
                 n_operatin = n_operatin + 1  # номер операции со счетом
-                purchase_history.append([n_operatin, operatin, debit, credit, total])
+                date_today = datetime.datetime.today().strftime("%d-%m-%Y")   # дата совершения операции
+                time_today = datetime.datetime.today().strftime("%H.%M.%S")   # время совершения операции
+                purchase_history.append([n_operatin, operatin, debit, credit, total,date_today,time_today])
                 total_credit = total_credit+credit
         elif choice == '5':
             with open('total_save.txt', 'w') as f:
