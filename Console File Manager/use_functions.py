@@ -37,15 +37,16 @@
 
 Для реализации основного меню можно использовать пример ниже или написать свой
 """
+import os
+import pickle
 def my_score():
     n_operatin = int(0)  # номер операции со счетом
-    operatin = 'нет операций'  # описание операции со счетом
+    operatin = 'Сумма на счете'  # описание операции со счетом
     debit = float(0)  # приход по счету пользователя
     credit = float(0)  # расход по счету пользователя
     with open('total_save.txt', 'r') as f:
         # Читаем сумму на счете из файла
         total = float(f.read())
-        print(f'Сумма на вашем счете {total}')
     purchase_history = [[n_operatin, operatin, debit, credit, total], ]  # история покупок
     total_debit = float(0)# итог по дебету
     total_credit = float(0)# итог по кредиту
@@ -53,6 +54,13 @@ def my_score():
         k = simbol * count
         print(k)
 
+    if os.path.exists('orders_pickle.data'):
+        with open('orders_pickle.data', 'rb') as f:
+            purchase_history = pickle.load(f)
+    # if os.path.exists('orders.txt'):
+    #     with open('orders.txt', 'r') as f:
+    #         for order in f:
+    #             purchase_history.append(order.replace('\n', ''))
     while True:
         print('1. пополнение счета')
         print('2. покупка')
@@ -81,12 +89,12 @@ def my_score():
                 total_credit = total_credit+credit
         elif choice == '3':
             width_n_operatin = 5  # ширина столбца - номер операции со счетом
-            width_operatin = 20   # ширина столбца -описание операции со счетом
-            width_debit = 10  # ширина столбца -приход по счету пользователя
-            width_credit = 10  # ширина столбца -расход по счету пользователя
-            width_total = 10  # ширина столбца -сумма на счету пользователя
-            print('N      операция              приход      расход      итог ')
-            separator('*', 60)
+            width_operatin = 25   # ширина столбца -описание операции со счетом
+            width_debit = 15  # ширина столбца -приход по счету пользователя
+            width_credit = 15  # ширина столбца -расход по счету пользователя
+            width_total = 15  # ширина столбца -сумма на счету пользователя
+            print('N    операция                    приход           расход           итог ')
+            separator('*', 80)
             for i in purchase_history:
                 tail_width_n_operatin = ' '*(width_n_operatin-len(str(i[0]))) # выравнивание по сроке - номер операции со счетом
                 tail_width_operatin = ' '*(width_operatin- len(i[1]))  # выравнивание по сроке -описание операции со счетом
@@ -95,8 +103,8 @@ def my_score():
                 tail_width_total = ' '*(width_total-len(str(i[4])))  # выравнивание по сроке -сумма на счету пользователя
                 print(f'{i[0]} {tail_width_n_operatin} {i[1]} {tail_width_operatin} {i[2]} {tail_width_debit} '
                        f'{i[3]} {tail_width_credit} {i[4]} {tail_width_total} ')
-                separator('-', 60)
-            print(f'       ИТОГО                 {total_debit}         {total_credit}         {i[4]} ')
+                separator('-',80)
+            print(f'       ИТОГО                      {total_debit}              {total_credit}              {i[4]} ')
         elif choice == '4':
             debit = float(0)  # приход по счету пользователя
             credit = float(input('Введите сумму для снятия: '))  # расход по счету пользователя
@@ -112,11 +120,14 @@ def my_score():
             with open('total_save.txt', 'w') as f:
                 #Записываем в файл сумму
                 f.write(str(total))
+            with open('orders_pickle.data', 'wb') as f:
+                pickle.dump(purchase_history, f)
+            # with open('orders.txt', 'w') as f:
+            #     for order in purchase_history:
+            #         f.write(f'{order}\n')
             break
         else:
             print('Неверный пункт меню')
-
-
 
 
 if __name__ == '__main__':
