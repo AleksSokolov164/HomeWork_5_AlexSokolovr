@@ -37,33 +37,40 @@
 
 Для реализации основного меню можно использовать пример ниже или написать свой
 """
-import os
-import pickle
-import datetime
+
 def my_score():
-    n_operatin = int(0)  # номер операции со счетом
+    import os
+    import pickle
+    import datetime
+
+    try:
+        if os.path.exists('orders_pickle.data'):
+            with open('orders_pickle.data', 'rb') as f:
+                purchase_history = pickle.load(f)
+    except EOFError:
+        purchase_history = []
+        print('История операций отсутствует')
+
+    try:
+        n_operatin = purchase_history[-1][0]  # номер операции со счетом
+    except IndexError:
+        n_operatin = 0
     operatin = 'Сумма на счете'  # описание операции со счетом
     debit = float(0)  # приход по счету пользователя
     credit = float(0)  # расход по счету пользователя
     with open('total_save.txt', 'r') as f:
         # Читаем сумму на счете из файла
-        total = float(f.read())
+        total = float(f.readline())
+        total_debit = float(f.readline())# итог по дебету
+        total_credit = float(f.readline())# итог по кредиту
     date_today = datetime.datetime.today().strftime("%d-%m-%Y") # дата совершения операции
     time_today = datetime.datetime.today().strftime("%H.%M.%S")  # время совершения операции
-    purchase_history = [[n_operatin, operatin, debit, credit, total,date_today,time_today], ]  # история покупок
-    total_debit = float(0)# итог по дебету
-    total_credit = float(0)# итог по кредиту
+
+    print( f' Сумма на счете: {total}')
     def separator(simbol, count): # функция вывода разделительной строки из знаков simbol  в кол-ве count
         k = simbol * count
         print(k)
 
-    if os.path.exists('orders_pickle.data'):
-        with open('orders_pickle.data', 'rb') as f:
-            purchase_history = pickle.load(f)
-    # if os.path.exists('orders.txt'):
-    #     with open('orders.txt', 'r') as f:
-    #         for order in f:
-    #             purchase_history.append(order.replace('\n', ''))
     while True:
         print('1. пополнение счета')
         print('2. покупка')
@@ -128,12 +135,10 @@ def my_score():
         elif choice == '5':
             with open('total_save.txt', 'w') as f:
                 #Записываем в файл сумму
-                f.write(str(total))
+                f.writelines([f'{str(total)}\n', f'{str(total_debit)}\n', f'{str(total_credit)}\n'])
             with open('orders_pickle.data', 'wb') as f:
                 pickle.dump(purchase_history, f)
-            # with open('orders.txt', 'w') as f:
-            #     for order in purchase_history:
-            #         f.write(f'{order}\n')
+
             break
         else:
             print('Неверный пункт меню')
