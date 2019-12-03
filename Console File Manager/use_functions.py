@@ -134,9 +134,10 @@ def my_score():
                 total_credit = total_credit+credit
         elif choice == '5':
             with open('total_save.txt', 'w') as f:
-                #Записываем в файл сумму
+                #Записываем в файл сумму. дебет и кредит
                 f.writelines([f'{str(total)}\n', f'{str(total_debit)}\n', f'{str(total_credit)}\n'])
             with open('orders_pickle.data', 'wb') as f:
+                # записываем в файл историю операций
                 pickle.dump(purchase_history, f)
 
             break

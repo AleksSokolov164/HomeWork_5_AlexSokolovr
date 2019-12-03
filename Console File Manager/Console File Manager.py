@@ -62,7 +62,8 @@ while True:
     print('10. мой банковский счет')
     print('11. cмена рабочей директории ')
     print('12. переименовать файл')
-    print('13. выход')
+    print ('13. сохранить содержимое рабочей директории в файл')
+    print('14. выход')
     choice = input('Выберите пункт меню')
     if choice == '1':
         name_file = input('Введите название папки')
@@ -75,10 +76,10 @@ while True:
     elif choice == '4':
         review_directory()
     elif choice == '5':
-        review_a_folders_directory()
+        print(review_a_folders_directory())
 
     elif choice == '6':
-        review_files_directory()
+        print(review_files_directory())
     elif choice == '7':
         info_os()
     elif choice == '8':
@@ -92,6 +93,8 @@ while True:
     elif choice == '12':
         file_rename()
     elif choice == '13':
+        save_info_directory_in_listdirTxt()
+    elif choice == '14':
         break
     else:
         print('Неверный пункт меню')

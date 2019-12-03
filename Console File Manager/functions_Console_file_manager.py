@@ -63,14 +63,17 @@ def review_directory():
 
 def review_a_folders_directory():
     for root, dirs, files in os.walk(os.getcwd()):
-        print(dirs)
-        break
+        return dirs
 
 def review_files_directory():
-    from os import listdir
-    from os.path import isfile, join
-    onlyfiles = [f for f in listdir(os.getcwd()) if isfile(join(os.getcwd(), f))]
-    print(onlyfiles)
+    for root, dirs, files in os.walk(os.getcwd()):
+        return files
+def save_info_directory_in_listdirTxt():
+    # сохранение информации о содержимом рабочей директории
+    with open('listdir.txt', 'w') as f:
+        f.write(f'files:{review_files_directory()}\n')
+        f.write(f'dirs:{review_a_folders_directory()}\n')
+
 
 def info_os():
     """
