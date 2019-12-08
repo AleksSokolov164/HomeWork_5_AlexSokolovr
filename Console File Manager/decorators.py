@@ -71,5 +71,5 @@ if __name__ == '__main__':
     result = my_sum(2, 4)
     print(result)
 
-    yes("kjh")
+    yes("Yes!")
 
