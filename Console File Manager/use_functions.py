@@ -39,17 +39,22 @@
 """
 import datetime
 
-def add_separators(f):
+def add_separators(f): # декоратор
     # inner - итоговая функция с новым поведение
     def inner(*args, **kwargs):
         # поведение до вызова
-        print('*' * 10)
+        print('*' * 100)
         result = f(*args, **kwargs)
         # поведение после вызова
-        print('*' * 10)
+        # print('*' * 100)
         return result
     # возвращается функция inner с новым поведением
     return inner
+
+@add_separators
+def print_decor(strk): # итоговая функция вывода с использованием декоратора
+    print(strk)
+
 
 def date_today():
     return datetime.datetime.today().strftime("%d-%m-%Y") # дата совершения операции
@@ -123,18 +128,18 @@ def my_score():
             width_debit = 15  # ширина столбца -приход по счету пользователя
             width_credit = 15  # ширина столбца -расход по счету пользователя
             width_total = 10  # ширина столбца -сумма на счету пользователя
-            print('N    операция                    приход           расход           итог         дата       время ')
-            print(separator('*', 100))
+            print_decor('N    операция                    приход           расход           итог         дата       время ')
+
             for i in purchase_history:
                 tail_width_n_operatin = ' '*(width_n_operatin-len(str(i[0]))) # выравнивание по сроке - номер операции со счетом
                 tail_width_operatin = ' '*(width_operatin- len(i[1]))  # выравнивание по сроке -описание операции со счетом
                 tail_width_debit = ' '*(width_debit-len(str(i[2])))  # выравнивание по сроке -приход по счету пользователя
                 tail_width_credit = ' '*(width_credit-len(str(i[3])))  # выравнивание по сроке -расход по счету пользователя
                 tail_width_total = ' '*(width_total-len(str(i[4])))  # выравнивание по сроке -сумма на счету пользователя
-                print(f'{i[0]} {tail_width_n_operatin} {i[1]} {tail_width_operatin} {i[2]} {tail_width_debit} '
+                print_decor(f'{i[0]} {tail_width_n_operatin} {i[1]} {tail_width_operatin} {i[2]} {tail_width_debit} '
                        f'{i[3]} {tail_width_credit} {i[4]} {tail_width_total}  {i[5]} {i[6]} ')
-                print (separator('-',100))
-            print(f'       ИТОГО                      {total_debit}              {total_credit}              {total} ')
+
+            print_decor(f'       ИТОГО                      {total_debit}              {total_credit}              {total} ')
 
         elif choice == '4':
             credit = float(input('Введите сумму для снятия: '))  # расход по счету пользователя
