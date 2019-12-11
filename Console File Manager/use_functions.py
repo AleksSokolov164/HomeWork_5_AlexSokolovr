@@ -72,10 +72,9 @@ def my_score():
     import pickle
 
     try:
-        if os.path.exists('orders_pickle.data'):
-            with open('orders_pickle.data', 'rb') as f:
-                purchase_history = pickle.load(f)
-    except EOFError:
+        with open('orders_pickle.data', 'rb') as f:
+            purchase_history = pickle.load(f)
+    except FileNotFoundError:
         purchase_history = []
         print('История операций отсутствует')
 
@@ -83,15 +82,19 @@ def my_score():
         n_operatin = purchase_history[-1][0]  # номер операции со счетом
     except IndexError:
         n_operatin = 0
-        operatin = 'Сумма на счете'  # описание операции со счетом
+        # operatin = 'Сумма на счете'  # описание операции со счетом
         debit = float(0)  # приход по счету пользователя
         credit = float(0)  # расход по счету пользователя
-    with open('total_save.txt', 'r') as f:
-        # Читаем сумму на счете из файла
-        total = float(f.readline())
-        total_debit = float(f.readline())# итог по дебету
-        total_credit = float(f.readline())# итог по кредиту
-
+    try:
+        with open('total_save.txt', 'r') as f:
+            # Читаем сумму на счете из файла
+            total = float(f.readline())
+            total_debit = float(f.readline())# итог по дебету
+            total_credit = float(f.readline())# итог по кредиту
+    except FileNotFoundError:
+        total = 0
+        total_debit = 0  # итог по дебету
+        total_credit = 0  # итог по кредиту
     print( f' Сумма на счете: {total}')
 
     while True:
