@@ -21,16 +21,16 @@ from victory import victorina
 #создание файла
 def create_a_folder(name_f):
     k = 0
-    not_error = 0
+    n_error = 0
     yes_error = 0
     try:
-        not_error = 1
+        n_error = 1
         os.mkdir(name_f)
     except FileExistsError:
         yes_error = 1
         print('Папка с таким именем уже существует')
     finally:
-        k = not_error+yes_error
+        k = n_error+yes_error
     return k
 
 
@@ -38,16 +38,16 @@ def create_a_folder(name_f):
 def delete_file(name_file):
     #удаление файла в текущей директории
     k = 0
-    not_error = 0
+    n_error = 0
     yes_error = 0
     try:
-        not_error = 1
+        n_error = 1
         os.rmdir(name_file)
     except FileNotFoundError:
         yes_error = 1
         print('Файла с таким именем не существует')
     finally:
-        k = not_error+yes_error
+        k = n_error+yes_error
     return k
 
 

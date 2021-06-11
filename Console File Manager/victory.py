@@ -60,9 +60,9 @@ def victorina():
     month2 = ['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь']
     mm = dict(zip(month,month2))
     import random
-    answer = 'да'
-    number_of_questions = 5
-    while answer=="да":
+    answer = 'ДА'
+    number_of_questions = 1
+    while answer=="ДА":
         result = random.sample(composer, number_of_questions)
         amount_answer_plus = 0
         for i in result:
@@ -77,7 +77,14 @@ def victorina():
                 amount_answer_plus = amount_answer_plus+1
         wrong_answers = number_of_questions - amount_answer_plus
         print(f"Количество правильных ответов={amount_answer_plus}, Количество неправильных ответов ={wrong_answers}")
-        answer = input("Желаете повторить ещё раз? (да\нет)")
+        answer = str(input("Желаете повторить ещё раз? (да\нет)")).upper()
+        while answer != 'ДА':
+            my_answer = "Хорошо!" if answer == 'НЕТ' else "Введите 'ДА' или 'НЕТ' пожалуйста"
+            print(my_answer)
+            if answer == 'НЕТ':
+                break
+            else:
+                answer = str(input("Желаете повторить ещё раз? (да\нет)")).upper()
 if __name__ == '__main__':
     print('Проверка фукции')
     victorina()
